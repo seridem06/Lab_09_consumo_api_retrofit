@@ -4,9 +4,9 @@ plugins {
     // ELIMINA ESTA LÍNEA: alias(libs.plugins.kotlin.compose)
 }
 
-android {
+android { // <-- INICIO DEL BLOQUE ANDROID
     namespace = "com.example.lab09"
-    compileSdk = 34  // Cambia 36 por 34 (versión más estable)
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.lab09"
@@ -27,18 +27,28 @@ android {
             )
         }
     }
+
+    // 👇 TODOS ESTOS BLOQUES ESTABAN FUERA. ¡DEBEN ESTAR AQUÍ DENTRO!
+
+    composeOptions {
+        // CORRECCIÓN PARA COMPATIBILIDAD CON Kotlin 1.9.10
+        kotlinCompilerExtensionVersion = "1.5.4"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
 
-}
+} // <-- FINAL DEL BLOQUE ANDROID
 
 dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -48,8 +58,8 @@ dependencies {
     // ELIMINA UNA DE LAS DEPENDENCIAS DUPLICADAS DE COIL:
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-    implementation("androidx.navigation:navigation-runtime-ktx:2.7.4")  // Cambia de 2.8.3
-    implementation("androidx.navigation:navigation-compose:2.7.4")  // Cambia de 2.8.3
+    implementation("androidx.navigation:navigation-runtime-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.4")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
